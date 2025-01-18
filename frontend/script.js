@@ -1,6 +1,5 @@
 const socket = io('http://127.0.0.1:5000'); // Use the backend's URL
 
-
 const textToType = document.getElementById('text-to-type');
 const playerProgress = document.getElementById('player-progress');
 const opponentProgress = document.getElementById('opponent-progress');
@@ -58,13 +57,20 @@ socket.on('start_countdown', (data) => {
     }, 1000);
 });
 
+// Update progress bar function
+function updateProgressBar(progressElement, progress, total) {
+    const percentage = (progress / total) * 100;
+    progressElement.style.width = `${percentage}%`;
+}
 
 // Handle individual player progress updates
 socket.on('player_progress', (data) => {
+    const totalShortcuts = shortcuts.length;
+
     if (data.username === username) {
-        // Update your progress
-        const totalShortcuts = shortcuts.length;
-        playerProgress.innerText = `Your Progress: ${data.progress}/${totalShortcuts}`;
+        // Update your progress bar
+        const playerBar = document.getElementById('player-progress-bar');
+        updateProgressBar(playerBar, data.progress, totalShortcuts);
 
         // Update the current shortcut if it's your progress
         if (data.progress !== currentShortcutIndex) {
@@ -80,13 +86,12 @@ socket.on('game_state', (data) => {
     shortcuts = data.shortcuts;
     const totalShortcuts = shortcuts.length;
 
-    // Update opponent progress
+    // Update opponent progress bar
     const opponent = Object.keys(data.progress).find((user) => user !== username);
     if (opponent) {
+        const opponentBar = document.getElementById('opponent-progress-bar');
         const opponentProgressValue = data.progress[opponent] || 0;
-        opponentProgress.innerText = `Opponent's Progress: ${opponentProgressValue}/${totalShortcuts}`;
-    } else {
-        opponentProgress.innerText = `Opponent's Progress: 0/${totalShortcuts}`;
+        updateProgressBar(opponentBar, opponentProgressValue, totalShortcuts);
     }
 });
 

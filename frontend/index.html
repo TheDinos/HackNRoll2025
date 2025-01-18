@@ -14,8 +14,18 @@
         <button id="start-game">Join Room</button>
         <div id="text-to-type">Loading...</div>
         <div id="progress">
-            <div id="player-progress">Your Progress: 0/0</div>
-            <div id="opponent-progress">Opponent's Progress: 0/0</div>
+            <div id="player-progress-container">
+                <label>Your Progress:</label>
+                <div class="progress-bar">
+                    <div id="player-progress-bar" class="progress"></div>
+                </div>
+            </div>
+            <div id="opponent-progress-container">
+                <label>Opponent's Progress:</label>
+                <div class="progress-bar">
+                    <div id="opponent-progress-bar" class="progress"></div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
