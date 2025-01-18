@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typeracer Game</title>
+    <title>Multiplayer Typeracer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="game-container">
-        <h1>Typeracer Game</h1>
+        <h1>Typeracer Multiplayer</h1>
+        <input type="text" id="player-name" placeholder="Enter your name" required>
+        <input type="text" id="room-name" placeholder="Enter room name" required>
+        <button id="start-game">Join Room</button>
         <div id="text-to-type">Loading...</div>
-        <input type="text" id="input-field" placeholder="Start typing here..." disabled>
         <div id="progress">
-            <span id="player-progress">Your Progress: 0%</span>
-        </div>
-        <button id="start-game">Start Game</button>
-        <div id="leaderboard">
-            <h2>Leaderboard</h2>
-            <ul id="leaderboard-list"></ul>
+            <div id="player-progress">Your Progress: 0/0</div>
+            <div id="opponent-progress">Opponent's Progress: 0/0</div>
         </div>
     </div>
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
